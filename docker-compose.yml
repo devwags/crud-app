@@ -1,0 +1,41 @@
+version: '3'
+services:
+  database:
+    image: postgres
+    volumes: 
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - crudnet
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: "${DEFAULT_USER}"
+      POSTGRES_PASSWORD: "${DEFAULT_PWD}"
+      POSTGRES_DB: "${DEFAULT_DB}"
+
+  backend:
+    build: ./backend
+    depends_on: 
+      - 'database'
+    ports: 
+      - '8080:8080'
+    networks:
+      - crudnet
+    volumes:
+      - "${PWD}/backend:/src/app"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    networks:
+      - crudnet
+    volumes:
+      - "${PWD}/frontend:/src/app"
+
+volumes:
+  pgdata:
+
+networks:
+  crudnet:
+    driver: bridge
