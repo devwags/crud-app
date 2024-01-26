@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, IconButton } from '@mui/material'
+import { AppBar, Box, IconButton } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
 import './App.css';
 
