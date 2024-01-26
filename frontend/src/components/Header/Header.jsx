@@ -4,7 +4,8 @@ import { AccountCircle, Home } from "@mui/icons-material";
 const loggedIn = true;
 
 const Header = () => {
-  return (
+
+    return (
     <AppBar position="static" sx={{ flexgrow: 1, height: "3em" }}>
       <Box
         display="flex"
