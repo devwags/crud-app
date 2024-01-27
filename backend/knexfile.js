@@ -11,6 +11,7 @@ module.exports = {
       directory: './migrations'
     },
     connection: {
+      connectionString: process.env.DB_CONNECTION_STRING,
       user: process.env.PG_USER,
       password: process.env.PG_PWD,
       database: process.env.PG_DB,

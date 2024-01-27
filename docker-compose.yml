@@ -2,12 +2,13 @@ version: '3'
 services:
   database:
     image: postgres
+    container_name: pgdatabase
     volumes: 
       - pgdata:/var/lib/postgresql/data
     networks:
       - crudnet
     ports:
-      - '5432:5432'
+      - "5432:${DEFAULT_PORT}"
     environment:
       POSTGRES_USER: "${DEFAULT_USER}"
       POSTGRES_PASSWORD: "${DEFAULT_PWD}"
@@ -21,6 +22,8 @@ services:
       - '8080:8080'
     networks:
       - crudnet
+    environment:
+      DB_CONNECTION_STRING: "postgres://${DEFAULT_USER}:${DEFAULT_PWD}@host.docker.internal/${DEFAULT_DB}"
     volumes:
       - "${PWD}/backend:/src/app"
 
