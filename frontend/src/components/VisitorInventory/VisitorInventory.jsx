@@ -27,7 +27,7 @@ const VisitorInventory = ( { url } ) => {
                             height="300"
                         />
                         <CardContent>
-                            <Typography>{item?.itemName}</Typography>
+                            <Typography fontWeight="bold">{item?.itemName}</Typography>
                             <Typography>Quantity: {item?.quantity}</Typography>
                             <Typography mt="1em">{formatDescription(item?.description)}</Typography>
                         </CardContent>

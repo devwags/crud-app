@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     res.send("Hello World!")
 })
 
-app.get('/items', (req, res) => {
+app.get('/api/items', (req, res) => {
     knex.select('*').from('items')
         .then(data => {
             res.json(data)

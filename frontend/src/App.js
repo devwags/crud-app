@@ -8,7 +8,7 @@ function App() {
       <Header />
       <Router>
         <Routes>
-          <Route path='/' element={<VisitorInventory url={`http://localhost:8080/items`}/>}/>
+          <Route path='/' element={<VisitorInventory url={`http://localhost:8080/api/items`}/>}/>
           <Route path='/item/:id' element='Hello Item'/>
           <Route path='/manager/:id' element='Hello Manager'/>
         </Routes>
