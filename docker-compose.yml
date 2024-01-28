@@ -5,8 +5,6 @@ services:
     container_name: pgdatabase
     volumes: 
       - pgdata:/var/lib/postgresql/data
-    # networks:
-    #   - crudnet
     ports:
       - "5432:${DEFAULT_PORT}"
     environment:
