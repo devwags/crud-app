@@ -1,7 +1,14 @@
 const express = require('express')
 const app = express()
 const port = 8080
+const cors = require('cors')
 const knex = require('knex')(require('./knexfile.js')['development']);
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+}
+
+app.use(cors(corsOptions))
 
 app.get('/', (req, res) => {
     res.send("Hello World!")

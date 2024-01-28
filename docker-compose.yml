@@ -5,8 +5,8 @@ services:
     container_name: pgdatabase
     volumes: 
       - pgdata:/var/lib/postgresql/data
-    networks:
-      - crudnet
+    # networks:
+    #   - crudnet
     ports:
       - "5432:${DEFAULT_PORT}"
     environment:
@@ -20,8 +20,6 @@ services:
       - 'database'
     ports: 
       - '8080:8080'
-    networks:
-      - crudnet
     environment:
       DB_CONNECTION_STRING: "postgres://${DEFAULT_USER}:${DEFAULT_PWD}@host.docker.internal/${DEFAULT_DB}"
     volumes:
@@ -31,20 +29,10 @@ services:
     build: ./frontend
     ports:
       - '3000:3000'
-    networks:
-      - crudnet
     volumes:
       - "${PWD}/frontend:/src/app"
-    environment:
-      - API_HOST=backend
-    links:
-      - backend
     depends_on: 
       - 'backend'
 
 volumes:
   pgdata:
-
-networks:
-  crudnet:
-    driver: bridge
