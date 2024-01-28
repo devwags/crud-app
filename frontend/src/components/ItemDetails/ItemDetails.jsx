@@ -18,7 +18,7 @@ const ItemDetails = () => {
         <>
             {item &&  
             <Card display="flex">
-                <Box display="flex">
+                <Box display="flex" px="1em" pt="1em">
                     <CardMedia 
                         component="img"
                         alt={item?.itemName}
