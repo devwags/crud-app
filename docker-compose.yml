@@ -35,6 +35,12 @@ services:
       - crudnet
     volumes:
       - "${PWD}/frontend:/src/app"
+    environment:
+      - API_HOST=backend
+    links:
+      - backend
+    depends_on: 
+      - 'backend'
 
 volumes:
   pgdata:

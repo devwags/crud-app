@@ -4,7 +4,7 @@ const port = 8080
 const knex = require('knex')(require('./knexfile.js')['development']);
 
 app.get('/', (req, res) => {
-    res.send(process.env.DB_CONNECTION_STRING)
+    res.send("Hello World!")
 })
 
 app.get('/items', (req, res) => {
