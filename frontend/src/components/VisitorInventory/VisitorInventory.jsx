@@ -3,16 +3,17 @@ import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
 import { formatDescription } from "../../utils/formatDescription";
 import { useNavigate } from "react-router-dom";
 
-const VisitorInventory = ( { url } ) => {
+const VisitorInventory = () => {
     let [items, setItems] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(url)
+        fetch(`http://localhost:8080/api/items`)
             .then((res) => res.json())
             .then((data) => setItems(data))
             .catch((err) => console.log(err))
-    }, [url])
+            //eslint-disable-next-line
+    }, [])
 
     return (
         <Grid container spacing={2} pt="1em" px="1em">

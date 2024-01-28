@@ -1,8 +1,6 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { formatDescription } from "../../utils/formatDescription";
-
 
 const ItemDetails = () => {
     const { id } = useParams();

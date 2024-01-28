@@ -18,7 +18,7 @@ exports.seed = async function(knex) {
       itemName: 'Thread', 
       description: `A thread is a long strand of material, often composed of several filaments or fibres, used for joining, creating or decorating textiles. Ancient Egyptians were known for creating thread using plant fibers, wool and hair. Today, thread can also be made of many different materials including but not limited to cotton, wool, linen, nylon, silk, polyester etc. There are also metal threads (sometimes used in decorative textiles), which can be made of fine wire.`, 
       quantity: 5,
-      imageUrl: 'https://i.etsystatic.com/21194477/r/il/94af87/3605076783/il_1588xN.3605076783_hn0b.jpg'
+      imageUrl: 'https://i.etsystatic.com/20299273/r/il/c53295/4929787523/il_fullxfull.4929787523_4kc8.jpg'
     },
     { id: 3, 
       userId: 2, 

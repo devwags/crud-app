@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<VisitorInventory url={`http://localhost:8080/api/items`}/>}/>
+          <Route path='/' element={<VisitorInventory />}/>
           <Route path='/item/:id' element={<ItemDetails />}/>
           <Route path='/manager/:id' element='Hello Manager'/>
         </Routes>
