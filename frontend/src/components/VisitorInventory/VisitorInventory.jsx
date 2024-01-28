@@ -10,7 +10,7 @@ const VisitorInventory = ( { url } ) => {
             .then((res) => res.json())
             .then((data) => setItems(data))
             .catch((err) => console.log(err))
-    }, [])
+    }, [url])
 
     return (
         <Grid container spacing={2} pt="1em" px="1em">
