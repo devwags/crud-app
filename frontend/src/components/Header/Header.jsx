@@ -1,9 +1,11 @@
 import { AppBar, Box, Link } from "@mui/material";
 import { AccountCircle, Home } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const loggedIn = false;
 
 const Header = () => {
+    const navigate = useNavigate();
 
     return (
     <AppBar position="static" sx={{ flexgrow: 1, height: "3em" }}>
@@ -39,7 +41,7 @@ const Header = () => {
             Login
           </Link>
         )}
-        <Home sx={{ marginRight: "auto", pl: "1em" }}/>
+        <Home onClick={() => navigate("/")} sx={{ marginRight: "auto", pl: "1em", cursor:"pointer" }}/>
       </Box>
     </AppBar>
   );

@@ -6,8 +6,8 @@ import ItemDetails from "./components/ItemDetails/ItemDetails";
 function App() {
   return (
     <>
-      <Header />
       <Router>
+        <Header />
         <Routes>
           <Route path='/' element={<VisitorInventory url={`http://localhost:8080/api/items`}/>}/>
           <Route path='/item/:id' element={<ItemDetails />}/>

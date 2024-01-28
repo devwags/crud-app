@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
 import { formatDescription } from "../../utils/formatDescription";
+import { useNavigate } from "react-router-dom";
 
 const VisitorInventory = ( { url } ) => {
     let [items, setItems] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(url)
@@ -16,7 +18,7 @@ const VisitorInventory = ( { url } ) => {
         <Grid container spacing={2} pt="1em" px="1em">
             {items && items.map((item) => (
                 <Grid key={item.id} item xs={3}>
-                    <Card>
+                    <Card onClick={()=>navigate(`/item/${item?.id}`)} sx={{cursor:'pointer'}}>
                         <CardMedia 
                             component="img"
                             alt={item?.itemName}
