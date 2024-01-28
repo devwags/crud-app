@@ -16,12 +16,18 @@ app.get('/', (req, res) => {
 
 app.get('/api/items', (req, res) => {
     knex.select('*').from('items')
-        .then(data => {
+        .then((data) => {
             res.json(data)
         })
         .catch((err) => {
             res.send(err)
         })
+})
+
+app.get('/api/items/:id', (req, res) => {
+    knex.select('*').from('items').where('id',req.params.id).first()
+        .then((data) => res.json(data))
+        .catch((err) => res.send(err))
 })
 
 app.listen(port, () => {

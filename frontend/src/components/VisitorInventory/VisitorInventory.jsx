@@ -8,10 +8,7 @@ const VisitorInventory = ( { url } ) => {
     useEffect(() => {
         fetch(url)
             .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                setItems(data)
-            })
+            .then((data) => setItems(data))
             .catch((err) => console.log(err))
     }, [])
 

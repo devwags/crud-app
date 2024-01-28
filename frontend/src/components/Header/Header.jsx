@@ -1,7 +1,7 @@
 import { AppBar, Box, Link } from "@mui/material";
 import { AccountCircle, Home } from "@mui/icons-material";
 
-const loggedIn = true;
+const loggedIn = false;
 
 const Header = () => {
 
@@ -39,7 +39,7 @@ const Header = () => {
             Login
           </Link>
         )}
-        <Home sx={{ marginRight: "auto", pl: "1em" }} />
+        <Home sx={{ marginRight: "auto", pl: "1em" }}/>
       </Box>
     </AppBar>
   );
