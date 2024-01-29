@@ -2,13 +2,13 @@ import { AppBar, Box, Button, Link, Modal } from "@mui/material";
 import { AccountCircle, Home } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import LoginModal from "../LoginModal/LoginModal";
 
-const loggedIn = false;
-
 const Header = () => {
-    const [showLogin, setShowLogin] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const navigate = useNavigate();
+    const {isLoggedIn} = useAuth();
 
 
     return (
@@ -21,7 +21,7 @@ const Header = () => {
             gap="2em"
             sx={{ height: "100%" }}
           >
-            {loggedIn ? (
+            {isLoggedIn ? (
               <>
                 <AccountCircle sx={{ height: "100%", pr: "1em" }} />
                 <Link
@@ -35,14 +35,14 @@ const Header = () => {
                 </Link>
               </>
             ) : (
-              <Button onClick={() => setShowLogin(true)} color="inherit" sx={{fontWeight:"bold"}}>
+              <Button onClick={() => setShowLoginModal(true)} color="inherit" sx={{fontWeight:"bold"}}>
                 Login
               </Button>
             )}
             <Home onClick={() => navigate("/")} sx={{ marginRight: "auto", pl: "1em", cursor:"pointer" }}/>
           </Box>
         </AppBar>
-        <LoginModal show={showLogin} close={() => setShowLogin(false)}/>
+        <LoginModal show={showLoginModal} close={() => setShowLoginModal(false)}/>
     </>
   );
 };

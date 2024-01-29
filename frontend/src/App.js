@@ -2,10 +2,11 @@ import Header from "./components/Header/Header";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import VisitorInventory from "./components/VisitorInventory/VisitorInventory";
 import ItemDetails from "./components/ItemDetails/ItemDetails";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Router>
         <Header />
         <Routes>
@@ -14,8 +15,7 @@ function App() {
           <Route path='/manager/:id' element='Hello Manager'/>
         </Routes>
       </Router>
-    </>
-    
+    </AuthProvider>
   );
 }
 
