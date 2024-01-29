@@ -9,6 +9,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send("Hello World!")
@@ -27,6 +28,15 @@ app.get('/api/items', (req, res) => {
 app.get('/api/items/:id', (req, res) => {
     knex.select('*').from('items').where('id',req.params.id).first()
         .then((data) => res.json(data))
+        .catch((err) => res.send(err))
+})
+
+app.post('/api/users/login', (req, res) => {
+    knex.select('*').from('users').where({
+        username: req.body.username,
+        password: req.body.password
+    }).first()
+        .then((data) => data ? res.json(data): res.status(401).send({message: 'Invalid Login'}))
         .catch((err) => res.send(err))
 })
 

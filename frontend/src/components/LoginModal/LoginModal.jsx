@@ -1,6 +1,12 @@
-import { Button, Card, CardActionArea, CardContent, Modal, TextField, Typography } from "@mui/material";
+import { Alert, Button, Card, CardActions, CardContent, Modal, TextField, Typography } from "@mui/material";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const LoginModal = ({show, close}) => {
+    const {setIsLoggedIn, setAuthUser } = useAuth();
+    const [showAlert, setShowAlert] = useState(false);
+    const navigate = useNavigate();
 
     const style = {
         position: 'absolute',
@@ -14,6 +20,34 @@ const LoginModal = ({show, close}) => {
         boxShadow: 24,
         p: 4,
       };
+
+    const login = async () => {
+        const username = document.getElementById("input-username").value;
+        const password = document.getElementById("input-password").value;
+
+        const response = await fetch('http://localhost:8080/api/users/login', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username: username, password: password})
+        })
+        const body = await response.json()
+        
+        response.status === 200 ? handleSuccess(body) : handleBadStatus();
+    }
+
+    const handleSuccess = (user) => {
+        setIsLoggedIn(true)
+        setAuthUser(user);
+        close();
+        navigate(`/user/${user?.id}`)
+    }
+
+    const handleBadStatus = () => {
+        setShowAlert(true);
+    }
     
     return (
         <Modal
@@ -27,10 +61,11 @@ const LoginModal = ({show, close}) => {
                     <TextField id="input-username" label="Username" variant="outlined" fullWidth sx={{mb: '.5em'}}/>
                     <TextField id="input-password" label="Password" variant="outlined" fullWidth/>
                 </CardContent>
-                <CardActionArea id="login-modal-action-area">
+                <CardActions id="login-modal-action-area">
                     <Button size="small">Register</Button>
-                    <Button size="small">Login</Button>
-                </CardActionArea>
+                    <Button size="small" onClick={login}>Login</Button>
+                </CardActions>
+                {showAlert && <Alert severity="error">Invalid Login</Alert>}
             </Card>
         </Modal>
     )

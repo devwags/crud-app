@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Link, Modal } from "@mui/material";
+import { AppBar, Box, Button, Link } from "@mui/material";
 import { AccountCircle, Home } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -9,7 +9,6 @@ const Header = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const navigate = useNavigate();
     const {isLoggedIn} = useAuth();
-
 
     return (
       <>
