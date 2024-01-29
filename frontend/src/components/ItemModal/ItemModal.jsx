@@ -12,7 +12,7 @@ const ItemModal = ({showItemModal, setShowItemModal}) => {
 
     const addItem = async () => {
         const userId = authUser.id;
-        const response = await fetch('http://localhost:8080/api/items', {
+        await fetch('http://localhost:8080/api/items', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -20,8 +20,6 @@ const ItemModal = ({showItemModal, setShowItemModal}) => {
             },
             body: JSON.stringify({userId, itemName: inputName, description: inputDescription, quantity: inputQuantity, imageUrl: inputUrl})
         })
-        const body = await response.json();
-        console.log(body)
     }
 
     return (
