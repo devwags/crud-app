@@ -61,7 +61,16 @@ app.delete('/api/items/', (req, res) => {
 })
 
 app.post('/api/items/', (req, res) => {
-
+    console.log(req.body)
+    knex.insert({
+        userId: req.body.userId,
+        itemName: req.body.itemName,
+        description: req.body.description,
+        quantity: req.body.quantity,
+        imageUrl: req.body?.imageUrl
+    }).into('items')
+        .then((data) => res.json(data))
+        .catch((err) => res.send(err))
 })
 
 app.listen(port, () => {

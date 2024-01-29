@@ -2,24 +2,12 @@ import { Alert, Button, Card, CardActions, CardContent, Modal, TextField, Typogr
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { modalStyle } from '../../utils/modalStyle'
 
 const LoginModal = ({show, close}) => {
     const {setIsLoggedIn, setAuthUser } = useAuth();
     const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
-
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 250,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        borderRadius: '25px',
-        boxShadow: 24,
-        p: 4,
-      };
 
     const login = async () => {
         const username = document.getElementById("input-username").value;
@@ -54,7 +42,7 @@ const LoginModal = ({show, close}) => {
             open={show}
             onClose={close}
         >
-            <Card sx={style}>
+            <Card sx={modalStyle}>
                 <CardContent>
                     <Typography fontWeight={400} fontSize={24} textAlign="center">Sign In</Typography>
                     <Typography textAlign="center" mb="2em">Inventory Manager Account</Typography>
