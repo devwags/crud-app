@@ -8,7 +8,7 @@ import LoginModal from "../LoginModal/LoginModal";
 const Header = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const navigate = useNavigate();
-    const {isLoggedIn} = useAuth();
+    const {isLoggedIn, authUser} = useAuth();
 
     return (
       <>
@@ -23,15 +23,9 @@ const Header = () => {
             {isLoggedIn ? (
               <>
                 <AccountCircle sx={{ height: "100%", pr: "1em" }} />
-                <Link
-                  href="#"
-                  fontWeight="bold"
-                  underline="hover"
-                  color="inherit"
-                  variant="body1"
-                >
+                <Button onClick={() => navigate(`/user/${authUser?.id}/inventory`)} color="inherit" sx={{fontWeight:"bold"}}>
                   My Inventory
-                </Link>
+                </Button>
               </>
             ) : (
               <Button onClick={() => setShowLoginModal(true)} color="inherit" sx={{fontWeight:"bold"}}>

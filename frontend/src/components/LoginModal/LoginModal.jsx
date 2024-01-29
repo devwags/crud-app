@@ -42,7 +42,7 @@ const LoginModal = ({show, close}) => {
         setIsLoggedIn(true)
         setAuthUser(user);
         close();
-        navigate(`/user/${user?.id}`)
+        navigate(`/user/${user?.id}/inventory`)
     }
 
     const handleBadStatus = () => {

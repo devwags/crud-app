@@ -40,6 +40,12 @@ app.post('/api/users/login', (req, res) => {
         .catch((err) => res.send(err))
 })
 
+app.get('/api/users/:id/inventory', (req, res) => {
+    knex.select('*').from('items').where('userId', req.params.id)
+        .then((data) => res.json(data))
+        .catch((err) => res.send(err))
+})
+
 app.listen(port, () => {
     console.log(`Crud app listening on port ${port}`)
 })
