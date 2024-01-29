@@ -19,7 +19,7 @@ const ManagerInventory = () => {
     },[items])
 
     const deleteItem = async (itemId) => {
-        const response = await fetch(`http://localhost:8080/api/items/${itemId}`, {
+        const response = await fetch(`http://localhost:8080/api/items/`, {
             method: 'DELETE',
             mode: 'cors',
             headers: {

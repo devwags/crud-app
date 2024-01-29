@@ -54,10 +54,14 @@ app.get('/api/users/:id/items', (req, res) => {
         .catch((err) => res.send(err))
 })
 
-app.delete('/api/items/:id', (req, res) => {
+app.delete('/api/items/', (req, res) => {
     knex.select('*').from('items').where('id', req.body.id).del()
         .then((data) => res.json(data))
         .catch((err) => res.send(err))
+})
+
+app.post('/api/items/', (req, res) => {
+
 })
 
 app.listen(port, () => {
