@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Link } from "@mui/material";
+import { AppBar, Box, Button } from "@mui/material";
 import { AccountCircle, Home } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -23,7 +23,7 @@ const Header = () => {
             {isLoggedIn ? (
               <>
                 <AccountCircle sx={{ height: "100%", pr: "1em" }} />
-                <Button onClick={() => navigate(`/user/${authUser?.id}/inventory`)} color="inherit" sx={{fontWeight:"bold"}}>
+                <Button onClick={() => navigate(`/user/${authUser?.id}/items`)} color="inherit" sx={{fontWeight:"bold"}}>
                   My Inventory
                 </Button>
               </>

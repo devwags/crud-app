@@ -36,12 +36,26 @@ app.post('/api/users/login', (req, res) => {
         username: req.body.username,
         password: req.body.password
     }).first()
-        .then((data) => data ? res.json(data): res.status(401).send({message: 'Invalid Login'}))
+        .then((data) => {
+            if (data) {
+                delete data.password
+                console.log(data)
+                res.json(data)
+            } else {
+                res.status(401).send({message: 'Invalid Login'})
+            }
+        })
         .catch((err) => res.send(err))
 })
 
-app.get('/api/users/:id/inventory', (req, res) => {
+app.get('/api/users/:id/items', (req, res) => {
     knex.select('*').from('items').where('userId', req.params.id)
+        .then((data) => res.json(data))
+        .catch((err) => res.send(err))
+})
+
+app.delete('/api/items/:id', (req, res) => {
+    knex.select('*').from('items').where('id', req.body.id).del()
         .then((data) => res.json(data))
         .catch((err) => res.send(err))
 })

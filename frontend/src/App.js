@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<VisitorInventory />}/>
         <Route path='/item/:id' element={<ItemDetails />}/>
-        {isLoggedIn && <Route path='/user/:id/inventory' element={<ManagerInventory />}/>}
+        {isLoggedIn && <Route path='/user/:id/items' element={<ManagerInventory />}/>}
         <Route path='*' element={<div>404: Nothing here!</div>}/>
       </Routes>
     </Router>
