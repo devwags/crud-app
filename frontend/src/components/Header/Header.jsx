@@ -1,4 +1,4 @@
-import { AppBar, Box, Button } from "@mui/material";
+import { AppBar, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
 import { AccountCircle, Home } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -7,8 +7,24 @@ import LoginModal from "../LoginModal/LoginModal";
 
 const Header = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
     const navigate = useNavigate();
-    const {isLoggedIn, authUser} = useAuth();
+    const {isLoggedIn, authUser, setIsLoggedIn, setAuthUser} = useAuth();
+
+    const logout = () => {
+      setAuthUser(null);
+      setIsLoggedIn(false);
+      navigate("/");
+    }
+
+    const handleMenuClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     return (
       <>
@@ -22,7 +38,12 @@ const Header = () => {
           >
             {isLoggedIn ? (
               <>
-                <AccountCircle sx={{ height: "100%", pr: "1em" }} />
+                <IconButton color="inherit" onClick={handleMenuClick} sx={{ height: "100%", mr: "1em" }} >
+                  <AccountCircle />
+                </IconButton>
+                <Menu id="account-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </Menu>
                 <Button onClick={() => navigate(`/user/${authUser?.id}/items`)} color="inherit" sx={{fontWeight:"bold"}}>
                   My Inventory
                 </Button>
@@ -32,7 +53,9 @@ const Header = () => {
                 Login
               </Button>
             )}
-            <Home onClick={() => navigate("/")} sx={{ marginRight: "auto", pl: "1em", cursor:"pointer" }}/>
+            <IconButton color="inherit" onClick={() => navigate("/")} sx={{ mr: "auto", ml: "1em", cursor:"pointer" }}>
+              <Home />
+            </IconButton>
           </Box>
         </AppBar>
         <LoginModal show={showLoginModal} close={() => setShowLoginModal(false)}/>
