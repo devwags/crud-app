@@ -32,7 +32,15 @@ const ItemModal = ({showItemModal, setShowItemModal, itemEditMode, setItemEditMo
     }
 
     const updateItem = async () => {
-        console.log('update w/: ', {inputName, inputDescription, inputQuantity, inputUrl})
+        const userId = authUser.id;
+        await fetch(`http://localhost:8080/api/items/${selectedItem.id}`, {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({userId, itemName: inputName, description: inputDescription, quantity: inputQuantity, imageUrl: inputUrl})
+        })
     }
 
     const handleClose = () => {

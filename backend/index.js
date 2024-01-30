@@ -39,7 +39,6 @@ app.post('/api/users/login', (req, res) => {
         .then((data) => {
             if (data) {
                 delete data.password
-                console.log(data)
                 res.json(data)
             } else {
                 res.status(401).send({message: 'Invalid Login'})
@@ -83,6 +82,19 @@ app.post('/api/users/register', (req, res) => {
             .then((data) => res.json(data))
             .catch((err) => res.send(err))
     : res.status(406).send({message: 'Invalid Registration'})
+})
+
+app.put('api/items/:id', (req, res) => {
+    console.log(req.body)
+    knex('items').where('id', req.body.id).update({
+        userId: req.body.userId,
+        itemName: req.body.itemName,
+        description: req.body.description,
+        quantity: req.body.quantity,
+        imageUrl: req.body?.imageUrl
+    })
+        .then((data) => res.json(data))
+        .catch((err) => res.send(err))
 })
 
 app.listen(port, () => {
