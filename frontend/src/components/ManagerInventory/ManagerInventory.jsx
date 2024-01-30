@@ -9,6 +9,8 @@ import ItemModal from "../ItemModal/ItemModal";
 const ManagerInventory = () => {
     const [items, setItems] = useState();
     const [showItemModal, setShowItemModal] = useState(false);
+    const [itemEditMode, setItemEditMode] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
     const {authUser} = useAuth();
     const navigate = useNavigate();
 
@@ -31,6 +33,12 @@ const ManagerInventory = () => {
         })
     }
 
+    const handleEditItem = (item) => {
+        setSelectedItem(item);
+        setItemEditMode(true);
+        setShowItemModal(true);
+    }
+
     return (
         <>
             <Grid container spacing={2} pt="1em" px="1em">
@@ -51,7 +59,7 @@ const ManagerInventory = () => {
                                 <Typography mt="1em">{formatDescription(item?.description)}</Typography>
                             </CardContent>
                             <CardActions>
-                                <IconButton aria-label="edit">
+                                <IconButton aria-label="edit" onClick={() => handleEditItem(item)}>
                                     <Edit />
                                 </IconButton>
                                 <IconButton aria-label="delete" onClick={()=>deleteItem(item.id)}>
@@ -67,7 +75,7 @@ const ManagerInventory = () => {
                     </IconButton>
                 </Grid>
             </Grid>
-            <ItemModal showItemModal={showItemModal} setShowItemModal={setShowItemModal}></ItemModal>
+            <ItemModal showItemModal={showItemModal} setShowItemModal={setShowItemModal} itemEditMode={itemEditMode} setItemEditMode={setItemEditMode} selectedItem={selectedItem}></ItemModal>
         </>
     )
 }
