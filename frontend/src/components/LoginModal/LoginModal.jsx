@@ -90,7 +90,7 @@ const LoginModal = ({show, close}) => {
                         <TextField id="input-lastname" label="Last Name" variant="outlined" fullWidth sx={{mb: '.5em'}} onChange={(e) => setLastName(e.target.value)}/>  
                     </>}
                     <TextField id="input-username" label="Username" variant="outlined" fullWidth sx={{mb: '.5em'}} onChange={(e) => setUserName(e.target.value)}/>
-                    <TextField id="input-password" label="Password" variant="outlined" fullWidth sx={{mb: '.5em'}} onChange={(e) => setPassword(e.target.value)}/>
+                    <TextField id="input-password" label="Password" type="password" variant="outlined" fullWidth sx={{mb: '.5em'}} onChange={(e) => setPassword(e.target.value)}/>
                 </CardContent>
                 <CardActions id="login-modal-action-area">
                     {showRegister ? <>
