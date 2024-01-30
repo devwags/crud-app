@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "initialize": "npm i; cd frontend; npm i; cd backend; npm i; npm run seed"
+  },
   "dependencies": {
     "dotenv": "^16.3.1"
   }
