@@ -29,6 +29,7 @@ const ItemModal = ({showItemModal, setShowItemModal, itemEditMode, setItemEditMo
             },
             body: JSON.stringify({userId, itemName: inputName, description: inputDescription, quantity: inputQuantity, imageUrl: inputUrl})
         })
+        setShowItemModal(false);
     }
 
     const updateItem = async () => {
@@ -41,6 +42,7 @@ const ItemModal = ({showItemModal, setShowItemModal, itemEditMode, setItemEditMo
             },
             body: JSON.stringify({id: selectedItem.id, userId, itemName: inputName, description: inputDescription, quantity: inputQuantity, imageUrl: inputUrl})
         })
+        setShowItemModal(false);
     }
 
     const handleClose = () => {
