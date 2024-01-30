@@ -1,6 +1,6 @@
 Steps to access application:
 1. Ensure local ports 3000, 8080, and 5432 are NOT in use
-2. Fork code from repo
+2. Clone repo
 3. cd into project root directory
 4. run "docker compose up"
 5. cd into "backend" directory
