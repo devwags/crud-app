@@ -41,7 +41,6 @@ const LoginModal = ({show, close}) => {
             },
             body: JSON.stringify({firstname, lastname, username, password})
         })
-        const body = await response.json()
 
         response.status === 200 ? handleGoodRegistration() : handleBadRegistration()
     }
