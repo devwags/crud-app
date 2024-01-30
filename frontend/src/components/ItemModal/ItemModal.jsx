@@ -39,7 +39,7 @@ const ItemModal = ({showItemModal, setShowItemModal, itemEditMode, setItemEditMo
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({userId, itemName: inputName, description: inputDescription, quantity: inputQuantity, imageUrl: inputUrl})
+            body: JSON.stringify({id: selectedItem.id, userId, itemName: inputName, description: inputDescription, quantity: inputQuantity, imageUrl: inputUrl})
         })
     }
 

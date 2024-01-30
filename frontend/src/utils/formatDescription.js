@@ -1,1 +1,1 @@
-export const formatDescription = (text) => text ? text.substring(0,100) + "..." : ''
+export const formatDescription = (text) => text && text.length > 100 ? text.substring(0,100) + "..." : text || ''

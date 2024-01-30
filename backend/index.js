@@ -84,7 +84,7 @@ app.post('/api/users/register', (req, res) => {
     : res.status(406).send({message: 'Invalid Registration'})
 })
 
-app.put('api/items/:id', (req, res) => {
+app.put('/api/items/:id', (req, res) => {
     console.log(req.body)
     knex('items').where('id', req.body.id).update({
         userId: req.body.userId,
