@@ -61,7 +61,6 @@ app.delete('/api/items/', (req, res) => {
 })
 
 app.post('/api/items/', (req, res) => {
-    console.log(req.body)
     knex.insert({
         userId: req.body.userId,
         itemName: req.body.itemName,
@@ -69,6 +68,17 @@ app.post('/api/items/', (req, res) => {
         quantity: req.body.quantity,
         imageUrl: req.body?.imageUrl
     }).into('items')
+        .then((data) => res.json(data))
+        .catch((err) => res.send(err))
+})
+
+app.post('/api/users/register', (req, res) => {
+    knex.insert({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        password: req.body.password,
+    }).into('users')
         .then((data) => res.json(data))
         .catch((err) => res.send(err))
 })
