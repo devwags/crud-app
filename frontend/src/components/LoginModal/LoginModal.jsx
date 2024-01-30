@@ -6,6 +6,7 @@ import { modalStyle } from '../../utils/modalStyle'
 
 const LoginModal = ({show, close}) => {
     const {setIsLoggedIn, setAuthUser } = useAuth();
+    const [showRegister, setShowRegister] = useState();
     const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
 
@@ -26,6 +27,10 @@ const LoginModal = ({show, close}) => {
         response.status === 200 ? handleSuccess(body) : handleBadStatus();
     }
 
+    const register = async () => {
+
+    }
+
     const handleSuccess = (user) => {
         setIsLoggedIn(true)
         setAuthUser(user);
@@ -40,18 +45,31 @@ const LoginModal = ({show, close}) => {
     return (
         <Modal
             open={show}
-            onClose={close}
+            onClose={() => {
+                setShowRegister(false);
+                close();
+            }}
         >
             <Card sx={modalStyle}>
                 <CardContent>
                     <Typography fontWeight={400} fontSize={24} textAlign="center">Sign In</Typography>
                     <Typography textAlign="center" mb="2em">Inventory Manager Account</Typography>
                     <TextField id="input-username" label="Username" variant="outlined" fullWidth sx={{mb: '.5em'}}/>
-                    <TextField id="input-password" label="Password" variant="outlined" fullWidth/>
+                    <TextField id="input-password" label="Password" variant="outlined" fullWidth sx={{mb: '.5em'}}/>
+                    {showRegister && <>
+                        <TextField id="input-firstname" label="First Name" variant="outlined" fullWidth sx={{mb: '.5em'}}/>
+                        <TextField id="input-lastname" label="Last Name" variant="outlined" fullWidth sx={{mb: '.5em'}}/>  
+                    </>}
                 </CardContent>
                 <CardActions id="login-modal-action-area">
-                    <Button size="small">Register</Button>
-                    <Button size="small" onClick={login}>Login</Button>
+                    {showRegister ? <>
+                        <Button size="small" onClick={() => setShowRegister(false)}>Cancel</Button>
+                        <Button size="small" onClick={register}>Register</Button>
+                    </> 
+                    : <>
+                        <Button size="small" onClick={() => setShowRegister(true)}>Register</Button>
+                        <Button size="small" onClick={login}>Login</Button>
+                    </>}
                 </CardActions>
                 {showAlert && <Alert severity="error">Invalid Login</Alert>}
             </Card>
