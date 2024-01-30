@@ -6,13 +6,17 @@ import { modalStyle } from '../../utils/modalStyle'
 
 const LoginModal = ({show, close}) => {
     const {setIsLoggedIn, setAuthUser } = useAuth();
-    const [showRegister, setShowRegister] = useState();
-    const [showAlert, setShowAlert] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
+    const [showGoodRegistrationAlert, setShowGoodRegistrationAlert] = useState(false)
+    const [showBadRegistrationAlert, setShowBadRegistrationAlert] = useState(false)
+    const [showBadLoginAlert, setShowBadLoginAlert] = useState(false);
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const login = async () => {
-        const username = document.getElementById("input-username").value;
-        const password = document.getElementById("input-password").value;
 
         const response = await fetch('http://localhost:8080/api/users/login', {
             method: 'POST',
@@ -24,24 +28,51 @@ const LoginModal = ({show, close}) => {
         })
         const body = await response.json()
         
-        response.status === 200 ? handleSuccess(body) : handleBadStatus();
+        response.status === 200 ? handleGoodLogin(body) : handleBadLogin();
     }
 
     const register = async () => {
+        clearAlerts();
+        const response = await fetch('http://localhost:8080/api/users/register', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({firstname, lastname, username, password})
+        })
+        const body = await response.json()
 
+        response.status === 200 ? handleGoodRegistration() : handleBadRegistration()
     }
 
-    const handleSuccess = (user) => {
+    const handleGoodLogin = (user) => {
         setIsLoggedIn(true)
         setAuthUser(user);
         close();
         navigate(`/user/${user?.id}/items`)
     }
 
-    const handleBadStatus = () => {
-        setShowAlert(true);
+    const handleBadLogin = () => {
+        setShowBadLoginAlert(true);
+    }
+
+    const handleGoodRegistration = () => {
+        setShowGoodRegistrationAlert(true);
+        setShowRegister(false);
+
     }
     
+    const handleBadRegistration = () => {
+        setShowBadRegistrationAlert(true);
+    }
+
+    const clearAlerts = () => {
+        setShowBadLoginAlert(false)
+        setShowGoodRegistrationAlert(false)
+        setShowBadRegistrationAlert(false)
+    }
+
     return (
         <Modal
             open={show}
@@ -54,12 +85,12 @@ const LoginModal = ({show, close}) => {
                 <CardContent>
                     <Typography fontWeight={400} fontSize={24} textAlign="center">Sign In</Typography>
                     <Typography textAlign="center" mb="2em">Inventory Manager Account</Typography>
-                    <TextField id="input-username" label="Username" variant="outlined" fullWidth sx={{mb: '.5em'}}/>
-                    <TextField id="input-password" label="Password" variant="outlined" fullWidth sx={{mb: '.5em'}}/>
                     {showRegister && <>
-                        <TextField id="input-firstname" label="First Name" variant="outlined" fullWidth sx={{mb: '.5em'}}/>
-                        <TextField id="input-lastname" label="Last Name" variant="outlined" fullWidth sx={{mb: '.5em'}}/>  
+                        <TextField id="input-firstname" label="First Name" variant="outlined" fullWidth sx={{mb: '.5em'}} onChange={(e) => setFirstName(e.target.value)}/>
+                        <TextField id="input-lastname" label="Last Name" variant="outlined" fullWidth sx={{mb: '.5em'}} onChange={(e) => setLastName(e.target.value)}/>  
                     </>}
+                    <TextField id="input-username" label="Username" variant="outlined" fullWidth sx={{mb: '.5em'}} onChange={(e) => setUserName(e.target.value)}/>
+                    <TextField id="input-password" label="Password" variant="outlined" fullWidth sx={{mb: '.5em'}} onChange={(e) => setPassword(e.target.value)}/>
                 </CardContent>
                 <CardActions id="login-modal-action-area">
                     {showRegister ? <>
@@ -71,7 +102,9 @@ const LoginModal = ({show, close}) => {
                         <Button size="small" onClick={login}>Login</Button>
                     </>}
                 </CardActions>
-                {showAlert && <Alert severity="error">Invalid Login</Alert>}
+                {showBadLoginAlert && <Alert severity="error">Invalid Login</Alert>}
+                {showGoodRegistrationAlert && <Alert severity="success">Registration Successful</Alert>}
+                {showBadRegistrationAlert && <Alert severity="error">Registration Failed</Alert>}
             </Card>
         </Modal>
     )

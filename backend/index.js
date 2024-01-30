@@ -73,14 +73,16 @@ app.post('/api/items/', (req, res) => {
 })
 
 app.post('/api/users/register', (req, res) => {
-    knex.insert({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        username: req.body.username,
-        password: req.body.password,
-    }).into('users')
-        .then((data) => res.json(data))
-        .catch((err) => res.send(err))
+    Object.values(req.body).every((v) => v) ? 
+        knex.insert({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            username: req.body.username,
+            password: req.body.password,
+        }).into('users')
+            .then((data) => res.json(data))
+            .catch((err) => res.send(err))
+    : res.status(406).send({message: 'Invalid Registration'})
 })
 
 app.listen(port, () => {
